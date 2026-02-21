@@ -43,7 +43,8 @@ public class MoviesHandler extends BaseHttpHandler {
                     handlePostMovie(ex);
                     break;
                 default:
-                    ErrorResponse er = new ErrorResponse("Ошибка запроса", "Данного эндпойнта не существует");
+                    ErrorResponse er = new ErrorResponse("Ошибка запроса",
+                            "Данного эндпойнта не существует");
                     sendJson(ex, 405, gson.toJson(er));
             }
         } catch (IOException e) {
