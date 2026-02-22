@@ -89,10 +89,8 @@ public class MoviesHandler extends BaseHttpHandler {
             return;
         }
 
-        int nextId = moviesStore.getNextId();
         Movie movie = optMovie.get();
 
-        movie.setId(nextId);
         moviesStore.addMovie(movie);
 
         sendJson(ex, 201, gson.toJson(movie));

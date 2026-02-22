@@ -1,9 +1,6 @@
 package ru.practicum.moviehub.http;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.practicum.moviehub.model.Movie;
 import ru.practicum.moviehub.store.MoviesStore;
 
@@ -33,8 +30,8 @@ public class MoviesApiTest {
                 .build();
     }
 
-    @BeforeEach
-    void beforeEach() {
+    @AfterEach
+    void afterEach() {
         store.cleanStore();
     }
 
@@ -377,7 +374,7 @@ public class MoviesApiTest {
                 "Content-Type должен содержать формат данных и кодировку");
 
         // проверяем, что фильм действительно удалён
-        assertNull(store.getMovies().get(targetIndex - 1), "Ссылка должна быть null");
+        assertNull(store.getMovieById(targetIndex), "Ссылка должна быть null");
     }
 
     @Test

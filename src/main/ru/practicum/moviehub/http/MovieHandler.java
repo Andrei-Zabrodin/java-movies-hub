@@ -26,7 +26,7 @@ public class MovieHandler extends BaseHttpHandler {
                 return;
             }
 
-            int requestedId = optId.get() - 1;
+            int requestedId = optId.get();
             switch (ex.getRequestMethod().toUpperCase()) {
                 case "GET":
                     handleGetMovieById(ex, requestedId);
@@ -67,9 +67,9 @@ public class MovieHandler extends BaseHttpHandler {
             return true;
         }
 
-        int requestedId = optId.get() - 1;
+        int requestedId = optId.get();
 
-        if (requestedId >= moviesStore.getMovies().size() || moviesStore.getMovies().get(requestedId) == null) {
+        if (moviesStore.getMovieById(requestedId) == null) {
             er = new ErrorResponse("Ошибка запроса", "Фильма с таким ID нет в списке");
             sendJson(ex, 404, gson.toJson(er));
             return true;
@@ -79,7 +79,7 @@ public class MovieHandler extends BaseHttpHandler {
     }
 
     private void handleGetMovieById(HttpExchange ex, int requestedId) throws IOException {
-        String json = gson.toJson(moviesStore.getMovies().get(requestedId));
+        String json = gson.toJson(moviesStore.getMovieById(requestedId));
         sendJson(ex, 200, json);
     }
 
